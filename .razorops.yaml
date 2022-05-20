@@ -4,50 +4,19 @@ global:
     - image: razorci/golang:1.14  # primary container will be used by all steps
     - image: bitnami/mongodb:4.4.1 # secondary container will be running in background
       environment:
-      # - MONGODB_ROOT_PASSWORD=${DB_ROOT_PASS}
-      # - MONGODB_DATABASE=${DB_NAME}
-      # - MONGODB_USERNAME=${DB_USER}
-      # - MONGODB_PASSWORD=${DB_PASS}
-
       - MONGODB_ROOT_PASSWORD=adminpass
       - MONGODB_DATABASE=test
       - MONGODB_USERNAME=appuser
       - MONGODB_PASSWORD=apppass
 tasks:
-  # build-image:
-  #   steps:
-  #   - checkout
-  #   - docker/build:
-  #      image: saurabh3460/todo-app1
-  #      tags: ["latest", "${CI_COMMIT_SHA:0:8}"]
-  #      dockerfile: server/Dockerfile
-  #      context: server/
-
   scan:
-    # depends: [build-image]
     steps:
     - checkout
     - commands:
       - | 
         curl https://static.snyk.io/cli/latest/snyk-linux -o snyk
         chmod +x ./snyk
-        #sudo mv ./snyk /usr/local/bin/
-        export SNYK_TOKEN=${SNYK_TOKEN}
-        export SNYK_HTTP_PROTOCOL_UPGRADE=1
-        echo ${SNYK_TOKEN}
-        cd server
-        docker build -t saurabh3460/todo-app1:${CI_COMMIT_SHA:0:8} .
-        ./snyk container test -d saurabh3460/todo-app1:${CI_COMMIT_SHA:0:8} --file=Dockerfile
+        docker build -t saurabh3460/todo-app1:${CI_COMMIT_SHA:0:8} -f server/Dockerfile server/
+        ./snyk container monitor -d saurabh3460/todo-app1:${CI_COMMIT_SHA:0:8} --file=server/Dockerfile || true
 
-  # test:
-  #   steps:
-  #   - checkout
-  #   - commands:
-  #     - |
-  #       cd server
-  #       export DB_CONNECTION=mongodb://appuser:apppass@localhost:27017/test
-  #       export DB_NAME=test
-  #       echo $DB_CONNECTION
-  #       echo $DB_NAME
-  #       go mod download
-  #       go test ./...
+
