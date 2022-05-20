@@ -18,7 +18,7 @@ tasks:
     steps:
     - checkout
     - docker/build:
-       image: saurabh3460/todo
+       image: saurabh3460/todo-app1
        tags: ["latest", "${CI_COMMIT_SHA:0:8}"]
        dockerfile: server/Dockerfile
        context: server/
@@ -33,9 +33,10 @@ tasks:
         chmod +x ./snyk
         #sudo mv ./snyk /usr/local/bin/
         export SNYK_TOKEN=${SNYK_TOKEN}
+        export SNYK_HTTP_PROTOCOL_UPGRADE=1
         echo ${SNYK_TOKEN}
         # ./snyk auth ${SNYK_TOKEN}
-        ./snyk container test -d saurabh3460/todo:${CI_COMMIT_SHA:0:8} --file=server/Dockerfile
+        ./snyk container test -d saurabh3460/todo-app1:${CI_COMMIT_SHA:0:8} --file=server/Dockerfile
 
   # test:
   #   steps:
