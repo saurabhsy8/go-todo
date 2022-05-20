@@ -32,7 +32,7 @@ tasks:
         chmod +x ./snyk
         # sudo mv ./snyk /usr/local/bin/
         export SNYK_TOKEN=${SNYK_TOKEN}
-        # ./snyk auth ${SNYK_TOKEN}
+        ./snyk auth ${SNYK_TOKEN}
         ./snyk container test saurabh3460/todo:${CI_COMMIT_SHA:0:8}
 
   test:
