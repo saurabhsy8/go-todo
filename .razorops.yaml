@@ -37,7 +37,7 @@ tasks:
         echo ${SNYK_TOKEN}
         cd server
         docker build -t saurabh3460/todo-app1:${CI_COMMIT_SHA:0:8} .
-        ./snyk container test -d saurabh3460/todo-app1:${CI_COMMIT_SHA:0:8} --file=./Dockerfile
+        ./snyk container test -d saurabh3460/todo-app1:${CI_COMMIT_SHA:0:8} --file=Dockerfile
 
   # test:
   #   steps:
