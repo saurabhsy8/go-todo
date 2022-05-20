@@ -29,9 +29,9 @@ tasks:
       - | 
         curl https://static.snyk.io/cli/latest/snyk-linux -o snyk
         chmod +x ./snyk
-        sudo mv ./snyk /usr/local/bin/
+        # sudo mv ./snyk /usr/local/bin/
         export SNYK_TOKEN=${SNYK_TOKEN}
-        snyk container test todo:${CI_COMMIT_SHA}
+        ./snyk container test todo:${CI_COMMIT_SHA}
 
   test:
     steps:
