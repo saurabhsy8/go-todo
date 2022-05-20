@@ -14,17 +14,17 @@ global:
       - MONGODB_USERNAME=appuser
       - MONGODB_PASSWORD=apppass
 tasks:
-  build-image:
-    steps:
-    - checkout
-    - docker/build:
-       image: saurabh3460/todo-app1
-       tags: ["latest", "${CI_COMMIT_SHA:0:8}"]
-       dockerfile: server/Dockerfile
-       context: server/
+  # build-image:
+  #   steps:
+  #   - checkout
+  #   - docker/build:
+  #      image: saurabh3460/todo-app1
+  #      tags: ["latest", "${CI_COMMIT_SHA:0:8}"]
+  #      dockerfile: server/Dockerfile
+  #      context: server/
 
   scan:
-    depends: [build-image]
+    # depends: [build-image]
     steps:
     - checkout
     - commands:
@@ -35,8 +35,9 @@ tasks:
         export SNYK_TOKEN=${SNYK_TOKEN}
         export SNYK_HTTP_PROTOCOL_UPGRADE=1
         echo ${SNYK_TOKEN}
-        # ./snyk auth ${SNYK_TOKEN}
-        ./snyk container test -d saurabh3460/todo-app1:${CI_COMMIT_SHA:0:8} --file=server/Dockerfile
+        cd server
+        docker build -t saurabh3460/todo-app1:${CI_COMMIT_SHA:0:8} .
+        ./snyk container test -d saurabh3460/todo-app1:${CI_COMMIT_SHA:0:8} --file=./Dockerfile
 
   # test:
   #   steps:
