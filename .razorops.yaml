@@ -1,8 +1,8 @@
 global:
   runner: 
     containers:
-    - image: razorci/golang:1.14
-    - image: bitnami/mongodb:4.4.1
+    - image: razorci/golang:1.14  # primary container will be used by all steps
+    - image: bitnami/mongodb:4.4.1 # secondary container will be running in background
       environment:
       # - MONGODB_ROOT_PASSWORD=${DB_ROOT_PASS}
       # - MONGODB_DATABASE=${DB_NAME}
@@ -14,6 +14,25 @@ global:
       - MONGODB_USERNAME=appuser
       - MONGODB_PASSWORD=apppass
 tasks:
+  build-image:
+    steps:
+    - checkout
+    - docker/build:
+       image: todo
+       tags: ["${CI_COMMIT_SHA}"]
+       dockerfile: server/Dockerfile
+       context: server/
+
+  scan:
+    steps:
+    - commands:
+      - | 
+        curl https://static.snyk.io/cli/latest/snyk-linux -o snyk
+        chmod +x ./snyk
+        sudo mv ./snyk /usr/local/bin/
+        export SNYK_TOKEN=${SNYK_TOKEN}
+        snyk container test todo:${CI_COMMIT_SHA}
+
   test:
     steps:
     - checkout
