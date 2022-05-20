@@ -18,12 +18,13 @@ tasks:
     steps:
     - checkout
     - docker/build:
-       image: todo
-       tags: ["${CI_COMMIT_SHA}"]
+       image: saurabh3460/todo
+       tags: ["latest", "${CI_COMMIT_SHA:0:8}"]
        dockerfile: server/Dockerfile
        context: server/
 
   scan:
+    depends: [build-image]
     steps:
     - commands:
       - | 
@@ -31,8 +32,8 @@ tasks:
         chmod +x ./snyk
         # sudo mv ./snyk /usr/local/bin/
         export SNYK_TOKEN=${SNYK_TOKEN}
-        ./snyk auth ${SNYK_TOKEN}
-        ./snyk container test todo:${CI_COMMIT_SHA}
+        # ./snyk auth ${SNYK_TOKEN}
+        ./snyk container test todo:${CI_COMMIT_SHA:0:8}
 
   test:
     steps:
