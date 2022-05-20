@@ -31,6 +31,7 @@ tasks:
         chmod +x ./snyk
         # sudo mv ./snyk /usr/local/bin/
         export SNYK_TOKEN=${SNYK_TOKEN}
+        ./snyk auth ${SNYK_TOKEN}
         ./snyk container test todo:${CI_COMMIT_SHA}
 
   test:
