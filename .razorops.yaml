@@ -35,7 +35,8 @@ tasks:
           apt-get install -y trivy
           trivy image --format template --template "@junit.tpl" -o junit-report.xml  go-todo:latest
 
-  reports:  
+  reports:
+    steps:
     - reports/junit:
       paths: junit-report.xml
 
