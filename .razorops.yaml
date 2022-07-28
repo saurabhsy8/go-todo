@@ -15,38 +15,42 @@ global:
 tasks:
   build:
     steps: 
+    - checkout
     - docker/build:
-       image: go-todo
-      #  push: true
-
+       image: saurabh3460/todo-app1
+       push: true
       #  tags: ["${CI_COMMIT_SHA}", "latest"]
        tags: [ "latest"]
        dockerfile: server/Dockerfile
-       context: /server
-
-  scanining:
-    steps:
+       context: server
     - commands:
       - |
-          apt-get install wget apt-transport-https gnupg
-          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | apt-key add -
-          echo deb https://aquasecurity.github.io/trivy-repo/deb bionic main | tee -a /etc/apt/sources.list.d/trivy.list
-          apt-get update
-          apt-get install -y trivy
-          trivy image --format template --template "@junit.tpl" -o junit-report.xml  go-todo:latest
+          ls
+          wget https://github.com/aquasecurity/trivy/releases/download/v0.30.3/trivy_0.30.3_Linux-64bit.deb
+          sudo dpkg -i trivy_0.30.3_Linux-64bit.deb
+          trivy image --format template --template "@junit.tpl" -o junit_report.xml  saurabh3460/todo-app1:latest
+    # - reports/junit:
+    #     paths: junit_report.xml
+       
 
-  reports:
-    steps:
-    - reports/junit:
-      paths: junit-report.xml
-
-  test:
-    steps:
-    - checkout
-    - commands:
-      - |
-        cd server
-        export DB_CONNECTION=mongodb://${DB_USER}:${DB_PASS}@${DB_HOST}:27017/${DB_NAME}
-        export DB_NAME=${DB_NAME}
-        go mod download
-        go test ./...
+  # scanining:
+  #   depends: [build]
+  #   steps:
+  #   - commands:
+  #     - |
+  #         wget https://github.com/aquasecurity/trivy/releases/download/v0.30.3/trivy_0.30.3_Linux-64bit.deb
+  #         sudo dpkg -i trivy_0.30.3_Linux-64bit.deb
+  #         trivy image --format template --template "@junit.tpl" -o junit_report.xml  saurabh3460/todo-app1:latest
+  #   - reports/junit:
+  #       paths: junit_report.xml
+        
+  # test:
+  #   steps:
+  #   - checkout
+  #   - commands:
+  #     - |
+  #       cd server
+  #       export DB_CONNECTION=mongodb://${DB_USER}:${DB_PASS}@${DB_HOST}:27017/${DB_NAME}
+  #       export DB_NAME=${DB_NAME}
+  #       go mod download
+  #       go test ./...
