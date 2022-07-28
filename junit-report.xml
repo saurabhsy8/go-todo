@@ -1,0 +1,137 @@
+<?xml version="1.0" ?>
+<testsuites>
+    <testsuite tests="32" failures="32" name="go-todo:latest (debian 10.12)" errors="0" skipped="0" time="">
+        <properties>
+            <property name="type" value="debian"></property>
+        </properties>
+        <testcase classname="libc6-2.28-10+deb10u1" name="[CRITICAL] CVE-2021-33574" time="">
+            <failure message="glibc: mq_notify does not handle separately allocated thread attributes" type="description">The mq_notify function in the GNU C Library (aka glibc) versions 2.32 and 2.33 has a use-after-free. It may use the notification thread attributes object (passed through its struct sigevent parameter) after it has been freed by the caller, leading to a denial of service (application crash) or possibly unspecified other impact.</failure>
+        </testcase>
+        <testcase classname="libc6-2.28-10+deb10u1" name="[CRITICAL] CVE-2021-35942" time="">
+            <failure message="glibc: Arbitrary read in wordexp()" type="description">The wordexp function in the GNU C Library (aka glibc) through 2.33 may crash or read arbitrary memory in parse_param (in posix/wordexp.c) when called with an untrusted, crafted pattern, potentially resulting in a denial of service or disclosure of information. This occurs because atoi was used but strtoul should have been used to ensure correct calculations.</failure>
+        </testcase>
+        <testcase classname="libc6-2.28-10+deb10u1" name="[CRITICAL] CVE-2022-23218" time="">
+            <failure message="glibc: Stack-based buffer overflow in svcunix_create via long pathnames" type="description">The deprecated compatibility function svcunix_create in the sunrpc module of the GNU C Library (aka glibc) through 2.34 copies its path argument on the stack without validating its length, which may result in a buffer overflow, potentially resulting in a denial of service or (if an application is not built with a stack protector enabled) arbitrary code execution.</failure>
+        </testcase>
+        <testcase classname="libc6-2.28-10+deb10u1" name="[CRITICAL] CVE-2022-23219" time="">
+            <failure message="glibc: Stack-based buffer overflow in sunrpc clnt_create via a long pathname" type="description">The deprecated compatibility function clnt_create in the sunrpc module of the GNU C Library (aka glibc) through 2.34 copies its hostname argument on the stack without validating its length, which may result in a buffer overflow, potentially resulting in a denial of service or (if an application is not built with a stack protector enabled) arbitrary code execution.</failure>
+        </testcase>
+        <testcase classname="libc6-2.28-10+deb10u1" name="[HIGH] CVE-2020-1751" time="">
+            <failure message="glibc: array overflow in backtrace functions for powerpc" type="description">An out-of-bounds write vulnerability was found in glibc before 2.31 when handling signal trampolines on PowerPC. Specifically, the backtrace function did not properly check the array bounds when storing the frame address, resulting in a denial of service or potential code execution. The highest threat from this vulnerability is to system availability.</failure>
+        </testcase>
+        <testcase classname="libc6-2.28-10+deb10u1" name="[HIGH] CVE-2020-1752" time="">
+            <failure message="glibc: use-after-free in glob() function when expanding ~user" type="description">A use-after-free vulnerability introduced in glibc upstream version 2.14 was found in the way the tilde expansion was carried out. Directory paths containing an initial tilde followed by a valid username were affected by this issue. A local attacker could exploit this flaw by creating a specially crafted path that, when processed by the glob function, would potentially lead to arbitrary code execution. This was fixed in version 2.32.</failure>
+        </testcase>
+        <testcase classname="libc6-2.28-10+deb10u1" name="[HIGH] CVE-2021-3326" time="">
+            <failure message="glibc: Assertion failure in ISO-2022-JP-3 gconv module related to combining characters" type="description">The iconv function in the GNU C Library (aka glibc or libc6) 2.32 and earlier, when processing invalid input sequences in the ISO-2022-JP-3 encoding, fails an assertion in the code path and aborts the program, potentially resulting in a denial of service.</failure>
+        </testcase>
+        <testcase classname="libc6-2.28-10+deb10u1" name="[HIGH] CVE-2021-3999" time="">
+            <failure message="glibc: Off-by-one buffer overflow/underflow in getcwd()" type="description">A flaw was found in glibc. An off-by-one buffer overflow and underflow in getcwd() may lead to memory corruption when the size of the buffer is exactly 1. A local attacker who can control the input buffer and size passed to getcwd() in a setuid program could use this flaw to potentially execute arbitrary code and escalate their privileges on the system.</failure>
+        </testcase>
+        <testcase classname="libc6-2.28-10+deb10u1" name="[MEDIUM] CVE-2019-25013" time="">
+            <failure message="glibc: buffer over-read in iconv when processing invalid multi-byte input sequences in the EUC-KR encoding" type="description">The iconv feature in the GNU C Library (aka glibc or libc6) through 2.32, when processing invalid multi-byte input sequences in the EUC-KR encoding, may have a buffer over-read.</failure>
+        </testcase>
+        <testcase classname="libc6-2.28-10+deb10u1" name="[MEDIUM] CVE-2020-10029" time="">
+            <failure message="glibc: stack corruption from crafted input in cosl, sinl, sincosl, and tanl functions" type="description">The GNU C Library (aka glibc or libc6) before 2.32 could overflow an on-stack buffer during range reduction if an input to an 80-bit long double function contains a non-canonical bit pattern, a seen when passing a 0x5d414141414141410000 value to sinl on x86 targets. This is related to sysdeps/ieee754/ldbl-96/e_rem_pio2l.c.</failure>
+        </testcase>
+        <testcase classname="libc6-2.28-10+deb10u1" name="[MEDIUM] CVE-2020-27618" time="">
+            <failure message="glibc: iconv when processing invalid multi-byte input sequences fails to advance the input state, which could result in an infinite loop" type="description">The iconv function in the GNU C Library (aka glibc or libc6) 2.32 and earlier, when processing invalid multi-byte input sequences in IBM1364, IBM1371, IBM1388, IBM1390, and IBM1399 encodings, fails to advance the input state, which could lead to an infinite loop in applications, resulting in a denial of service, a different vulnerability from CVE-2016-10228.</failure>
+        </testcase>
+        <testcase classname="libc6-2.28-10+deb10u1" name="[LOW] CVE-2010-4756" time="">
+            <failure message="glibc: glob implementation can cause excessive CPU and memory consumption due to crafted glob expressions" type="description">The glob implementation in the GNU C Library (aka glibc or libc6) allows remote authenticated users to cause a denial of service (CPU and memory consumption) via crafted glob expressions that do not match any pathnames, as demonstrated by glob expressions in STAT commands to an FTP daemon, a different vulnerability than CVE-2010-2632.</failure>
+        </testcase>
+        <testcase classname="libc6-2.28-10+deb10u1" name="[LOW] CVE-2016-10228" time="">
+            <failure message="glibc: iconv program can hang when invoked with the -c option" type="description">The iconv program in the GNU C Library (aka glibc or libc6) 2.31 and earlier, when invoked with multiple suffixes in the destination encoding (TRANSLATE or IGNORE) along with the -c option, enters an infinite loop when processing invalid multi-byte input sequences, leading to a denial of service.</failure>
+        </testcase>
+        <testcase classname="libc6-2.28-10+deb10u1" name="[LOW] CVE-2018-20796" time="">
+            <failure message="glibc: uncontrolled recursion in function check_dst_limits_calc_pos_1 in posix/regexec.c" type="description">In the GNU C Library (aka glibc or libc6) through 2.29, check_dst_limits_calc_pos_1 in posix/regexec.c has Uncontrolled Recursion, as demonstrated by &#39;(\227|)(\\1\\1|t1|\\\2537)+&#39; in grep.</failure>
+        </testcase>
+        <testcase classname="libc6-2.28-10+deb10u1" name="[LOW] CVE-2019-1010022" time="">
+            <failure message="glibc: stack guard protection bypass" type="description">** DISPUTED ** GNU Libc current is affected by: Mitigation bypass. The impact is: Attacker may bypass stack guard protection. The component is: nptl. The attack vector is: Exploit stack buffer overflow vulnerability and use this bypass vulnerability to bypass stack guard. NOTE: Upstream comments indicate &#34;this is being treated as a non-security bug and no real threat.&#34;</failure>
+        </testcase>
+        <testcase classname="libc6-2.28-10+deb10u1" name="[LOW] CVE-2019-1010023" time="">
+            <failure message="glibc: running ldd on malicious ELF leads to code execution because of wrong size computation" type="description">** DISPUTED ** GNU Libc current is affected by: Re-mapping current loaded library with malicious ELF file. The impact is: In worst case attacker may evaluate privileges. The component is: libld. The attack vector is: Attacker sends 2 ELF files to victim and asks to run ldd on it. ldd execute code. NOTE: Upstream comments indicate &#34;this is being treated as a non-security bug and no real threat.&#34;</failure>
+        </testcase>
+        <testcase classname="libc6-2.28-10+deb10u1" name="[LOW] CVE-2019-1010024" time="">
+            <failure message="glibc: ASLR bypass using cache of thread stack and heap" type="description">** DISPUTED ** GNU Libc current is affected by: Mitigation bypass. The impact is: Attacker may bypass ASLR using cache of thread stack and heap. The component is: glibc. NOTE: Upstream comments indicate &#34;this is being treated as a non-security bug and no real threat.&#34;</failure>
+        </testcase>
+        <testcase classname="libc6-2.28-10+deb10u1" name="[LOW] CVE-2019-1010025" time="">
+            <failure message="glibc: information disclosure of heap addresses of pthread_created thread" type="description">** DISPUTED ** GNU Libc current is affected by: Mitigation bypass. The impact is: Attacker may guess the heap addresses of pthread_created thread. The component is: glibc. NOTE: the vendor&#39;s position is &#34;ASLR bypass itself is not a vulnerability.&#34;</failure>
+        </testcase>
+        <testcase classname="libc6-2.28-10+deb10u1" name="[LOW] CVE-2019-19126" time="">
+            <failure message="glibc: LD_PREFER_MAP_32BIT_EXEC not ignored in setuid binaries" type="description">On the x86-64 architecture, the GNU C Library (aka glibc) before 2.31 fails to ignore the LD_PREFER_MAP_32BIT_EXEC environment variable during program execution after a security transition, allowing local attackers to restrict the possible mapping addresses for loaded libraries and thus bypass ASLR for a setuid program.</failure>
+        </testcase>
+        <testcase classname="libc6-2.28-10+deb10u1" name="[LOW] CVE-2019-9192" time="">
+            <failure message="glibc: uncontrolled recursion in function check_dst_limits_calc_pos_1 in posix/regexec.c" type="description">** DISPUTED ** In the GNU C Library (aka glibc or libc6) through 2.29, check_dst_limits_calc_pos_1 in posix/regexec.c has Uncontrolled Recursion, as demonstrated by &#39;(|)(\\1\\1)*&#39; in grep, a different issue than CVE-2018-20796. NOTE: the software maintainer disputes that this is a vulnerability because the behavior occurs only with a crafted pattern.</failure>
+        </testcase>
+        <testcase classname="libc6-2.28-10+deb10u1" name="[LOW] CVE-2020-6096" time="">
+            <failure message="glibc: signed comparison vulnerability in the ARMv7 memcpy function" type="description">An exploitable signed comparison vulnerability exists in the ARMv7 memcpy() implementation of GNU glibc 2.30.9000. Calling memcpy() (on ARMv7 targets that utilize the GNU glibc implementation) with a negative value for the &#39;num&#39; parameter results in a signed comparison vulnerability. If an attacker underflows the &#39;num&#39; parameter to memcpy(), this vulnerability could lead to undefined behavior such as writing to out-of-bounds memory and potentially remote code execution. Furthermore, this memcpy() implementation allows for program execution to continue in scenarios where a segmentation fault or crash should have occurred. The dangers occur in that subsequent execution and iterations of this code will be executed with this corrupted data.</failure>
+        </testcase>
+        <testcase classname="libc6-2.28-10+deb10u1" name="[LOW] CVE-2021-27645" time="">
+            <failure message="glibc: Use-after-free in addgetnetgrentX function in netgroupcache.c" type="description">The nameserver caching daemon (nscd) in the GNU C Library (aka glibc or libc6) 2.29 through 2.33, when processing a request for netgroup lookup, may crash due to a double-free, potentially resulting in degraded service or Denial of Service on the local system. This is related to netgroupcache.c.</failure>
+        </testcase>
+        <testcase classname="libssl1.1-1.1.1n-0+deb10u1" name="[CRITICAL] CVE-2022-1292" time="">
+            <failure message="openssl: c_rehash script allows command injection" type="description">The c_rehash script does not properly sanitise shell metacharacters to prevent command injection. This script is distributed by some operating systems in a manner where it is automatically executed. On such operating systems, an attacker could execute arbitrary commands with the privileges of the script. Use of the c_rehash script is considered obsolete and should be replaced by the OpenSSL rehash command line tool. Fixed in OpenSSL 3.0.3 (Affected 3.0.0,3.0.1,3.0.2). Fixed in OpenSSL 1.1.1o (Affected 1.1.1-1.1.1n). Fixed in OpenSSL 1.0.2ze (Affected 1.0.2-1.0.2zd).</failure>
+        </testcase>
+        <testcase classname="libssl1.1-1.1.1n-0+deb10u1" name="[CRITICAL] CVE-2022-2068" time="">
+            <failure message="openssl: the c_rehash script allows command injection" type="description">In addition to the c_rehash shell command injection identified in CVE-2022-1292, further circumstances where the c_rehash script does not properly sanitise shell metacharacters to prevent command injection were found by code review. When the CVE-2022-1292 was fixed it was not discovered that there are other places in the script where the file names of certificates being hashed were possibly passed to a command executed through the shell. This script is distributed by some operating systems in a manner where it is automatically executed. On such operating systems, an attacker could execute arbitrary commands with the privileges of the script. Use of the c_rehash script is considered obsolete and should be replaced by the OpenSSL rehash command line tool. Fixed in OpenSSL 3.0.4 (Affected 3.0.0,3.0.1,3.0.2,3.0.3). Fixed in OpenSSL 1.1.1p (Affected 1.1.1-1.1.1o). Fixed in OpenSSL 1.0.2zf (Affected 1.0.2-1.0.2ze).</failure>
+        </testcase>
+        <testcase classname="libssl1.1-1.1.1n-0+deb10u1" name="[HIGH] CVE-2022-2097" time="">
+            <failure message="openssl: AES OCB fails to encrypt some bytes" type="description">AES OCB mode for 32-bit x86 platforms using the AES-NI assembly optimised implementation will not encrypt the entirety of the data under some circumstances. This could reveal sixteen bytes of data that was preexisting in the memory that wasn&#39;t written. In the special case of &#34;in place&#34; encryption, sixteen bytes of the plaintext would be revealed. Since OpenSSL does not support OCB based cipher suites for TLS and DTLS, they are both unaffected. Fixed in OpenSSL 3.0.5 (Affected 3.0.0-3.0.4). Fixed in OpenSSL 1.1.1q (Affected 1.1.1-1.1.1p).</failure>
+        </testcase>
+        <testcase classname="libssl1.1-1.1.1n-0+deb10u1" name="[LOW] CVE-2007-6755" time="">
+            <failure message="Dual_EC_DRBG: weak pseudo random number generator" type="description">The NIST SP 800-90A default statement of the Dual Elliptic Curve Deterministic Random Bit Generation (Dual_EC_DRBG) algorithm contains point Q constants with a possible relationship to certain &#34;skeleton key&#34; values, which might allow context-dependent attackers to defeat cryptographic protection mechanisms by leveraging knowledge of those values.  NOTE: this is a preliminary CVE for Dual_EC_DRBG; future research may provide additional details about point Q and associated attacks, and could potentially lead to a RECAST or REJECT of this CVE.</failure>
+        </testcase>
+        <testcase classname="libssl1.1-1.1.1n-0+deb10u1" name="[LOW] CVE-2010-0928" time="">
+            <failure message="openssl: RSA authentication weakness" type="description">OpenSSL 0.9.8i on the Gaisler Research LEON3 SoC on the Xilinx Virtex-II Pro FPGA uses a Fixed Width Exponentiation (FWE) algorithm for certain signature calculations, and does not verify the signature before providing it to a caller, which makes it easier for physically proximate attackers to determine the private key via a modified supply voltage for the microprocessor, related to a &#34;fault-based attack.&#34;</failure>
+        </testcase>
+        <testcase classname="openssl-1.1.1n-0+deb10u1" name="[CRITICAL] CVE-2022-1292" time="">
+            <failure message="openssl: c_rehash script allows command injection" type="description">The c_rehash script does not properly sanitise shell metacharacters to prevent command injection. This script is distributed by some operating systems in a manner where it is automatically executed. On such operating systems, an attacker could execute arbitrary commands with the privileges of the script. Use of the c_rehash script is considered obsolete and should be replaced by the OpenSSL rehash command line tool. Fixed in OpenSSL 3.0.3 (Affected 3.0.0,3.0.1,3.0.2). Fixed in OpenSSL 1.1.1o (Affected 1.1.1-1.1.1n). Fixed in OpenSSL 1.0.2ze (Affected 1.0.2-1.0.2zd).</failure>
+        </testcase>
+        <testcase classname="openssl-1.1.1n-0+deb10u1" name="[CRITICAL] CVE-2022-2068" time="">
+            <failure message="openssl: the c_rehash script allows command injection" type="description">In addition to the c_rehash shell command injection identified in CVE-2022-1292, further circumstances where the c_rehash script does not properly sanitise shell metacharacters to prevent command injection were found by code review. When the CVE-2022-1292 was fixed it was not discovered that there are other places in the script where the file names of certificates being hashed were possibly passed to a command executed through the shell. This script is distributed by some operating systems in a manner where it is automatically executed. On such operating systems, an attacker could execute arbitrary commands with the privileges of the script. Use of the c_rehash script is considered obsolete and should be replaced by the OpenSSL rehash command line tool. Fixed in OpenSSL 3.0.4 (Affected 3.0.0,3.0.1,3.0.2,3.0.3). Fixed in OpenSSL 1.1.1p (Affected 1.1.1-1.1.1o). Fixed in OpenSSL 1.0.2zf (Affected 1.0.2-1.0.2ze).</failure>
+        </testcase>
+        <testcase classname="openssl-1.1.1n-0+deb10u1" name="[HIGH] CVE-2022-2097" time="">
+            <failure message="openssl: AES OCB fails to encrypt some bytes" type="description">AES OCB mode for 32-bit x86 platforms using the AES-NI assembly optimised implementation will not encrypt the entirety of the data under some circumstances. This could reveal sixteen bytes of data that was preexisting in the memory that wasn&#39;t written. In the special case of &#34;in place&#34; encryption, sixteen bytes of the plaintext would be revealed. Since OpenSSL does not support OCB based cipher suites for TLS and DTLS, they are both unaffected. Fixed in OpenSSL 3.0.5 (Affected 3.0.0-3.0.4). Fixed in OpenSSL 1.1.1q (Affected 1.1.1-1.1.1p).</failure>
+        </testcase>
+        <testcase classname="openssl-1.1.1n-0+deb10u1" name="[LOW] CVE-2007-6755" time="">
+            <failure message="Dual_EC_DRBG: weak pseudo random number generator" type="description">The NIST SP 800-90A default statement of the Dual Elliptic Curve Deterministic Random Bit Generation (Dual_EC_DRBG) algorithm contains point Q constants with a possible relationship to certain &#34;skeleton key&#34; values, which might allow context-dependent attackers to defeat cryptographic protection mechanisms by leveraging knowledge of those values.  NOTE: this is a preliminary CVE for Dual_EC_DRBG; future research may provide additional details about point Q and associated attacks, and could potentially lead to a RECAST or REJECT of this CVE.</failure>
+        </testcase>
+        <testcase classname="openssl-1.1.1n-0+deb10u1" name="[LOW] CVE-2010-0928" time="">
+            <failure message="openssl: RSA authentication weakness" type="description">OpenSSL 0.9.8i on the Gaisler Research LEON3 SoC on the Xilinx Virtex-II Pro FPGA uses a Fixed Width Exponentiation (FWE) algorithm for certain signature calculations, and does not verify the signature before providing it to a caller, which makes it easier for physically proximate attackers to determine the private key via a modified supply voltage for the microprocessor, related to a &#34;fault-based attack.&#34;</failure>
+        </testcase>
+    </testsuite>
+    <testsuite tests="0" failures="0" name="go-todo:latest (debian 10.12)" errors="0" skipped="0" time="">
+        <properties>
+            <property name="type" value="debian"></property>
+        </properties>
+    </testsuite>
+    <testsuite tests="6" failures="6" name="bin/todo" errors="0" skipped="0" time="">
+        <properties>
+            <property name="type" value="gobinary"></property>
+        </properties>
+        <testcase classname="go.mongodb.org/mongo-driver-v1.3.7" name="[MEDIUM] CVE-2021-20329" time="">
+            <failure message="mongo-go-driver: specific cstrings input may not be properly validated" type="description">Specific cstrings input may not be properly validated in the MongoDB Go Driver when marshalling Go objects into BSON. A malicious user could use a Go object with specific string to potentially inject additional fields into marshalled documents. This issue affects all MongoDB GO Drivers up to (and including) 1.5.0.</failure>
+        </testcase>
+        <testcase classname="golang.org/x/crypto-v0.0.0-20190530122614-20be4c3c3ed5" name="[HIGH] CVE-2020-29652" time="">
+            <failure message="golang: crypto/ssh: crafted authentication request can lead to nil pointer dereference" type="description">A nil pointer dereference in the golang.org/x/crypto/ssh component through v0.0.0-20201203163018-be400aefbc4c for Go allows remote attackers to cause a denial of service against SSH servers.</failure>
+        </testcase>
+        <testcase classname="golang.org/x/crypto-v0.0.0-20190530122614-20be4c3c3ed5" name="[HIGH] CVE-2020-7919" time="">
+            <failure message="golang: Integer overflow on 32bit architectures via crafted certificate allows for denial of service" type="description">Go before 1.12.16 and 1.13.x before 1.13.7 (and the crypto/cryptobyte package before 0.0.0-20200124225646-8b5121be2f68 for Go) allows attacks on clients (resulting in a panic) via a malformed X.509 certificate.</failure>
+        </testcase>
+        <testcase classname="golang.org/x/crypto-v0.0.0-20190530122614-20be4c3c3ed5" name="[HIGH] CVE-2020-9283" time="">
+            <failure message="golang.org/x/crypto: Processing of crafted ssh-ed25519 public keys allows for panic" type="description">golang.org/x/crypto before v0.0.0-20200220183623-bac4c82f6975 for Go allows a panic during signature verification in the golang.org/x/crypto/ssh package. A client can attack an SSH server that accepts public keys. Also, a server can attack any SSH client.</failure>
+        </testcase>
+        <testcase classname="golang.org/x/crypto-v0.0.0-20190530122614-20be4c3c3ed5" name="[HIGH] CVE-2022-27191" time="">
+            <failure message="golang: crash in a golang.org/x/crypto/ssh server" type="description">The golang.org/x/crypto/ssh package before 0.0.0-20220314234659-1baeb1ce4c0b for Go allows an attacker to crash a server in certain circumstances involving AddHostKey.</failure>
+        </testcase>
+        <testcase classname="golang.org/x/text-v0.3.3" name="[HIGH] CVE-2021-38561" time="">
+            <failure message="golang: out-of-bounds read in golang.org/x/text/language leads to DoS" type="description">A flaw was found in golang. The language package for go language can panic due to an out-of-bounds read when an incorrectly formatted language tag is being parsed. This flaw allows an attacker to cause applications using this package to parse untrusted input data to crash, leading to a denial of service of the affected component.</failure>
+        </testcase>
+    </testsuite>
+    <testsuite tests="0" failures="0" name="bin/todo" errors="0" skipped="0" time="">
+        <properties>
+            <property name="type" value="gobinary"></property>
+        </properties>
+    </testsuite>
+</testsuites>

@@ -13,6 +13,29 @@ global:
       - MONGODB_PASSWORD=${DB_PASS}
 
 tasks:
+  build:
+    steps: 
+    - docker/build:
+       image: go-todo
+      #  push: true
+      #  tags: ["${CI_COMMIT_SHA}", "latest"]
+       tags: [ "latest"]
+       dockerfile: server/Dockerfile
+       context: /server
+  scanining:
+    - commands:
+      - |
+          apt-get install wget apt-transport-https gnupg
+          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | apt-key add -
+          echo deb https://aquasecurity.github.io/trivy-repo/deb bionic main | tee -a /etc/apt/sources.list.d/trivy.list
+          apt-get update
+          apt-get install -y trivy
+          trivy image --format template --template "@junit.tpl" -o junit-report.xml  go-todo:latest
+
+  reports:  
+    - reports/junit:
+      paths: junit-report.xml
+
   test:
     steps:
     - checkout
