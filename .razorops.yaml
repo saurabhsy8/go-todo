@@ -31,7 +31,7 @@ tasks:
           trivy image --format template --template "@junit.tpl" -o junit_report.xml  saurabh3460/todo-app1:latest
           cat junit_report.xml
     - reports/junit:
-        paths: ./*.xml
+        paths: ["junit_report.xml"]
        
   # test:
   #   steps:
