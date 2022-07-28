@@ -18,13 +18,14 @@ tasks:
     - docker/build:
        image: go-todo
       #  push: true
-      
+
       #  tags: ["${CI_COMMIT_SHA}", "latest"]
        tags: [ "latest"]
        dockerfile: server/Dockerfile
        context: /server
 
   scanining:
+    steps:
     - commands:
       - |
           apt-get install wget apt-transport-https gnupg
