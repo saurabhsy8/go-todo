@@ -26,7 +26,7 @@ tasks:
       - |
           wget https://github.com/aquasecurity/trivy/releases/download/v0.30.3/trivy_0.30.3_Linux-64bit.deb
           sudo dpkg -i trivy_0.30.3_Linux-64bit.deb
-          trivy image --format template --template "@junit.tpl" -o junit_report.xml  saurabh3460/todo-app:latest
+          trivy image --format template --template "@junit.tpl" -o junit_report.xml  saurabh3460/todo-app1:latest
     - reports/junit:
         paths: ["junit_report.xml"]
        
