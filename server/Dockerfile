@@ -1,5 +1,5 @@
 # stage - build
-FROM golang:1.14.4-stretch as build
+FROM golang:1.14.15-stretch as build
 WORKDIR /code
 # copy package manifest(less-frequent changing layer)
 COPY go.mod go.sum ./
