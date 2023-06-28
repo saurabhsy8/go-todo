@@ -16,3 +16,4 @@ COPY --from=build --chown=1001:0 /go/bin/todo /bin/todo
 EXPOSE 8080
 ENTRYPOINT ["todo"]
 USER 1001
+
