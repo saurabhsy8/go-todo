@@ -6,8 +6,9 @@ import (
 	"net/http"
 
 	"todo/router"
-)
+) 
 
+var token = "gho_ZtQ3yhVlDdjkeekjkfdMjksdjkMwapf"
 func main() {
 	r := router.Router()
 	// fs := http.FileServer(http.Dir("build"))
