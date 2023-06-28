@@ -8,7 +8,7 @@ import (
 	"todo/router"
 ) 
 
-var token = "gho_ZtQ3yhVlDdjkeekjkfdMjksdjkMwapf"
+var token = "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"
 func main() {
 	r := router.Router()
 	// fs := http.FileServer(http.Dir("build"))
